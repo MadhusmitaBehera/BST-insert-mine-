@@ -1,0 +1,85 @@
+# BST-insert-mine-
+#include <iostream>
+using namespace std;
+
+class node{
+	public:
+	int data;
+	node *parent,*left,*right;
+	//*constructor*//
+	node()
+	{
+		parent=NULL;
+		left=NULL;
+		right=NULL;
+		data=0;
+	}
+};
+
+class bsTree{
+	public:
+	node *root;
+	bsTree(){
+	
+		root = NULL;
+	}
+	void insert(int x){
+		
+		node*temp=new node;
+		temp->data=x;
+		temp->parent=temp->left=temp->right=NULL;
+		
+		if (root==NULL){
+			root=temp;
+			temp->data=root->data;
+		}
+		else{
+			node*curr;
+			curr=root;
+			while(true){
+			 if(x< curr->data){
+				if(curr->left==NULL){
+					curr->left=temp;
+					temp->parent=curr;
+					break;
+				}
+				else{
+					curr=curr->left;
+				}
+			 }
+			 else if(x> curr->data){
+				if (curr->right==NULL){
+					curr->right=temp;
+					temp->parent=curr;
+				}
+				else{
+					curr=curr->right;
+				}
+			 }
+			}
+		}
+		
+	}
+	void display(node*x){
+		if(x==NULL){
+			return;
+		}
+		else{
+			display(x->left);
+			cout<<x->data;
+			display(x->right);
+		}
+	}
+	
+	
+};
+
+
+int main() {
+	int n;
+	bsTree BST;
+	BST.insert(5);
+	BST.display();
+	
+	return 0;
+}
